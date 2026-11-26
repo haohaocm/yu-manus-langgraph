@@ -1,0 +1,14 @@
+---
+description: 联调/真模型测试结束后关闭实验室模型环境
+alwaysApply: true
+---
+
+# 测后关闭环境（强制）
+
+真模型 / SSE / Agent 联调**结束**后（本轮测试不再继续）：
+
+1. 运行一键关闭：`.\scripts\stop_env.ps1`（经 SSH 停 Qwen+bge；可选 `-AlsoApp` 停本机 `:8200`）。  
+2. 实验室本机也可用：`scripts/stop_lab_services.sh`。  
+3. 只停本项目相关进程（`vllm.entrypoints.openai.api_server`、`serve_bge_embeddings.py` 及残留 llm worker）；不杀无关进程。  
+4. 若用户明确说「先别关 / 接着测」，则跳过本步骤。  
+5. 与 `env-before-tests` 配对：测前 `ensure_env.ps1 -StartMissing`，测后 `stop_env.ps1`。

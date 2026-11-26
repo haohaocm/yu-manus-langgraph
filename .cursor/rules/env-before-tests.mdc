@@ -1,0 +1,14 @@
+---
+description: 跑联调/真模型测试前先检查 Qwen+bge 环境，异常则启动或说明
+alwaysApply: true
+---
+
+# 测前环境检查（强制）
+
+在跑 **需要真模型 / 真 embedding** 的测试、SSE 试玩、Agent 联调前：
+
+1. **先检测**：本机 `18000`（Qwen）、`18001`（bge）；必要时实验室 `:8000/:8001`。  
+2. **优先脚本**：`.\scripts\ensure_env.ps1`（只检）或 `.\scripts\ensure_env.ps1 -StartMissing`（缺则启；已占用不杀）。  
+3. 实验室侧也可用：`scripts/check_lab_services.sh`（经 SSH 执行）。  
+4. **已占用端口**：按实验室规则 **不 kill、不擅自重启**；报告 PID/端口后问用户。  
+5. 仅离线假模型单测可跳过本检查。

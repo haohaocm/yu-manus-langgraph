@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.idea/
+*.egg-info/
+dist/
+build/
+
+# Local env / IDE clutter
+.env
+pytest-of-*/
+tmp*/
+ca7_e*/
+*.sqlite
+
+# Agent 默认可写沙箱（保留目录与 README；内容可丢）
+artifacts/agent_workspace/*
+!artifacts/agent_workspace/.gitkeep
+!artifacts/agent_workspace/outputs/
+!artifacts/agent_workspace/outputs/.gitkeep
+artifacts/agent_workspace/outputs/**
+!artifacts/agent_workspace/outputs/.gitkeep
+!artifacts/agent_workspace/README.md
+
+# CE-3 tool output artifacts (keep folder via .gitkeep; files are disposable)
+artifacts/tool_outputs/*
+!artifacts/tool_outputs/.gitkeep
+
+# CE-5 event logs (disposable; can delete manually)
+artifacts/event_logs/*
+!artifacts/event_logs/.gitkeep
+
+# CE-6 search index artifacts (rebuildable; keep folder)
+artifacts/search_index/*
+!artifacts/search_index/.gitkeep
+
+# CE-6 corpus sample texts are tracked; do not ignore artifacts/corpus/
+# 第三方浅克隆（jieba 等）体积大，本地自备，勿提交
+artifacts/workspace_demos/
+
+# CA-1 写文件备份
+*.ca1.bak
+
+# CA-4 checkpoints（可删库重置）
+artifacts/checkpoints/*
+!artifacts/checkpoints/.gitkeep

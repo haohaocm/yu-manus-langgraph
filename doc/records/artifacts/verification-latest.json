@@ -1,0 +1,93 @@
+{
+  "title": "LG-4 verification",
+  "started_at": "2026-11-19T15:37:38+08:00",
+  "project": "C:\\Users\\hhcm\\Desktop\\123\\开发\\yu-manus-langgraph",
+  "ensure_api": {
+    "action": "reuse",
+    "ok": true,
+    "detail": "HTTP 200: {\"status\":\"UP\",\"app\":\"yu-manus-langgraph\",\"version\":\"0.1.0\"}"
+  },
+  "env": {
+    "api_8200": {
+      "ok": true,
+      "url": "http://127.0.0.1:8200/health",
+      "detail": "HTTP 200: {\"status\":\"UP\",\"app\":\"yu-manus-langgraph\",\"version\":\"0.1.0\"}"
+    },
+    "qwen_18000": {
+      "ok": false,
+      "url": "http://127.0.0.1:18000/v1/models",
+      "detail": "<urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>"
+    },
+    "mcp_8090": {
+      "ok": true,
+      "url": "http://127.0.0.1:8090/ping",
+      "detail": "HTTP 200: {\"status\":\"ok\",\"service\":\"mcp-gateway\",\"time\":\"2026-11-19T07:37:41.033538400Z\",\"mcpEndpoint\":\"/mcp\",\"tools\":[\"add\",\"base64\",\"datetime\",\"echo\",\"hash\",\"http_get\",\"json_format\",\"json_query\",\"measure\",\"now\",\"random\",\"text_regex\",\"text_replace\",\"text_stats\",\"text_transform\",\"uuid\",\"word_count\"]}"
+    }
+  },
+  "pytest_offline": {
+    "ok": true,
+    "returncode": 0,
+    "cmd": [
+      "C:\\Users\\hhcm\\Desktop\\123\\开发\\yu-manus-langgraph\\.venv\\Scripts\\python.exe",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/test_ending.py",
+      "tests/test_phase0_scaffold.py",
+      "tests/test_phase1_manus_graph.py",
+      "tests/test_phase2_mcp_loader.py",
+      "tests/test_phase3_api.py"
+    ],
+    "stdout": "......................                                                   [100%]\n22 passed in 1.68s\n",
+    "stderr": ""
+  },
+  "semantic_scenarios": {
+    "ok": true,
+    "cases": [
+      {
+        "name": "completed_add_terminate",
+        "ok": true,
+        "status": "completed",
+        "end_reason": "sum ok",
+        "answer_preview": "2 加 3 等于 5。"
+      },
+      {
+        "name": "abandoned_terminate",
+        "ok": true,
+        "status": "abandoned",
+        "end_reason": "缺少搜索工具",
+        "answer_preview": "抱歉，当前缺少搜索工具，无法完成。"
+      },
+      {
+        "name": "budget_exceeded",
+        "ok": true,
+        "status": "budget_exceeded",
+        "end_reason": "exceeded max_steps=2 (step=3)",
+        "answer_preview": "已达到步数上限，任务未完成。"
+      }
+    ]
+  },
+  "api_smoke": {
+    "ok": true,
+    "health": {
+      "ok": true,
+      "detail": "HTTP 200: {\"status\":\"UP\",\"app\":\"yu-manus-langgraph\",\"version\":\"0.1.0\"}"
+    },
+    "live_agent_run": {
+      "attempted": false,
+      "ok": false,
+      "detail": "SKIP: Qwen tunnel :18000 down",
+      "body": null
+    }
+  },
+  "summary": {
+    "offline_ok": true,
+    "api_health_ok": true,
+    "live_ok_or_skipped": true,
+    "overall_pass_for_lg4": true,
+    "notes": [
+      "本机 Qwen 隧道 :18000 不可用，真模型 POST 已跳过"
+    ]
+  },
+  "finished_at": "2026-11-19T15:37:45+08:00"
+}
